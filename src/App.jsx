@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { BrowserRouter, Navigate, Outlet, Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import { AlertTriangle, Database } from 'lucide-react';
+import { Analytics as VercelAnalytics } from '@vercel/analytics/react';
 import { useApp } from './state/AppContext.jsx';
 import Landing from './components/landing/Landing.jsx';
 import Auth from './components/Auth.jsx';
@@ -67,6 +68,7 @@ export default function App() {
   return (
     <BrowserRouter>
       <AppProviderGate />
+      <VercelAnalytics />
     </BrowserRouter>
   );
 }
