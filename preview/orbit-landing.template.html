@@ -1,0 +1,339 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Orbit — Your college life, in one place</title>
+<!--CSS-->
+<style>
+  /* canvas + helpers specific to the static export */
+  html { scroll-behavior: smooth; }
+  .ob-hero-inner { animation: heroIn 1.1s cubic-bezier(0.16,1,0.3,1) both; }
+  @keyframes heroIn { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
+</style>
+</head>
+<body class="ob-page" id="ob-top">
+
+<!-- ================= NAV ================= -->
+<nav class="ob-nav">
+  <a class="ob-nav-link ob-brand" href="#ob-top" style="display:flex;align-items:center;gap:9px;padding-left:0;text-decoration:none;">
+    <svg width="27" height="27" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+      <defs>
+        <radialGradient id="mg1" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#8b5cf6" stop-opacity="0.55"/><stop offset="100%" stop-color="#8b5cf6" stop-opacity="0"/></radialGradient>
+        <linearGradient id="mr1" x1="0" y1="0" x2="32" y2="32"><stop offset="0%" stop-color="#c4b5fd"/><stop offset="55%" stop-color="#8b5cf6"/><stop offset="100%" stop-color="#67e8f9"/></linearGradient>
+        <radialGradient id="mb1" cx="35%" cy="32%" r="75%"><stop offset="0%" stop-color="#c4b5fd"/><stop offset="55%" stop-color="#8b5cf6"/><stop offset="100%" stop-color="#4c1d95"/></radialGradient>
+      </defs>
+      <circle cx="16" cy="16" r="15" fill="url(#mg1)"/>
+      <circle cx="16" cy="16" r="7.2" fill="url(#mb1)"/>
+      <ellipse cx="16" cy="16" rx="13.5" ry="4.6" stroke="url(#mr1)" stroke-width="1.9" transform="rotate(-18 16 16)" opacity="0.95"/>
+    </svg>
+    <span style="font-size:19px;font-weight:800;letter-spacing:-0.02em;color:#fff;">Orbit</span>
+  </a>
+  <div class="ob-nav-center">
+    <a class="ob-nav-link" href="#ob-top">Home</a>
+    <a class="ob-nav-link" href="#ob-features">Features</a>
+    <a class="ob-nav-link" href="#ob-students">For Students</a>
+    <a class="ob-nav-link" href="#ob-about">About</a>
+  </div>
+  <div class="ob-nav-right">
+    <a class="ob-btn ob-btn-ghost ob-btn-sm" href="#get-started" data-auth="signin">Sign in</a>
+    <a class="ob-btn ob-btn-white ob-btn-sm" href="#get-started" data-auth="signup">Get started</a>
+  </div>
+</nav>
+
+<!-- ================= HERO ================= -->
+<header class="ob-hero">
+  <div class="ob-scene">
+    <canvas id="stars" class="ob-stars-canvas"></canvas>
+    <div class="ob-nebula ob-nebula-a"></div>
+    <div class="ob-nebula ob-nebula-b"></div>
+    <div class="ob-nebula ob-nebula-c"></div>
+    <div class="ob-nebula ob-nebula-d"></div>
+    <div class="ob-planet-glow"></div>
+    <div class="ob-comet k1"></div>
+    <div class="ob-comet k2"></div>
+
+    <div class="ob-system" aria-hidden="true">
+      <!-- back ring arcs + orbits -->
+      <svg class="ob-rings" width="1400" height="760" viewBox="0 0 1400 760">
+        <defs>
+          <linearGradient id="obRingA" x1="0" y1="0" x2="1400" y2="0" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#67e8f9" stop-opacity="0.05"/><stop offset="30%" stop-color="#a78bfa" stop-opacity="0.75"/><stop offset="55%" stop-color="#c4b5fd" stop-opacity="0.9"/><stop offset="78%" stop-color="#8b5cf6" stop-opacity="0.65"/><stop offset="100%" stop-color="#67e8f9" stop-opacity="0.08"/>
+          </linearGradient>
+          <linearGradient id="obRingB" x1="0" y1="0" x2="1400" y2="0" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#a78bfa" stop-opacity="0.05"/><stop offset="45%" stop-color="#7dd3fc" stop-opacity="0.6"/><stop offset="70%" stop-color="#67e8f9" stop-opacity="0.75"/><stop offset="100%" stop-color="#a78bfa" stop-opacity="0.06"/>
+          </linearGradient>
+          <linearGradient id="obRingC" x1="0" y1="0" x2="1400" y2="0" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#67e8f9" stop-opacity="0.03"/><stop offset="50%" stop-color="#6ee7b7" stop-opacity="0.5"/><stop offset="100%" stop-color="#67e8f9" stop-opacity="0.04"/>
+          </linearGradient>
+        </defs>
+        <g class="ob-ring-spin">
+          <path class="ob-ring-ellipse"    d="M 130 470 A 570 150 0 0 1 1270 470" fill="none" stroke="url(#obRingA)" stroke-width="30" opacity="0.5"/>
+          <path class="ob-ring-ellipse r2" d="M 190 480 A 510 132 0 0 1 1210 480" fill="none" stroke="url(#obRingB)" stroke-width="16" opacity="0.55"/>
+          <path class="ob-ring-ellipse r3" d="M 250 492 A 450 112 0 0 1 1150 492" fill="none" stroke="url(#obRingC)" stroke-width="8" opacity="0.5"/>
+          <path class="ob-ring-ellipse r4" d="M 90 462 A 610 164 0 0 1 1310 462" fill="none" stroke="url(#obRingB)" stroke-width="5" opacity="0.4"/>
+        </g>
+        <ellipse class="ob-orbit-path"    cx="700" cy="470" rx="640" ry="205"/>
+        <ellipse class="ob-orbit-path p2" cx="700" cy="470" rx="520" ry="160"/>
+        <ellipse class="ob-orbit-path p3" cx="700" cy="470" rx="800" ry="252"/>
+      </svg>
+
+      <!-- planet body -->
+      <div class="ob-planet-wrap">
+        <div class="ob-planet"></div>
+        <div class="ob-planet-rim"></div>
+      </div>
+
+      <!-- front ring arcs -->
+      <svg class="ob-rings" width="1400" height="760" viewBox="0 0 1400 760">
+        <g class="ob-ring-spin">
+          <path class="ob-ring-ellipse"    d="M 130 470 A 570 150 0 0 0 1270 470" fill="none" stroke="url(#obRingA)" stroke-width="30" opacity="0.85"/>
+          <path class="ob-ring-ellipse r2" d="M 190 480 A 510 132 0 0 0 1210 480" fill="none" stroke="url(#obRingB)" stroke-width="16" opacity="0.9"/>
+          <path class="ob-ring-ellipse r3" d="M 250 492 A 450 112 0 0 0 1150 492" fill="none" stroke="url(#obRingC)" stroke-width="8" opacity="0.85"/>
+          <path class="ob-ring-ellipse r4" d="M 90 462 A 610 164 0 0 0 1310 462" fill="none" stroke="url(#obRingB)" stroke-width="5" opacity="0.6"/>
+          <path d="M 240 500 A 470 118 0 0 0 1160 500" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="1.4" opacity="0.5"/>
+        </g>
+      </svg>
+
+      <!-- moons (squash-wrapped rotating arms) -->
+      <div class="ob-moon-arm"><div style="transform:scaleY(0.3077)"><div class="ob-moon-arm-rot" style="animation-duration:52s;animation-delay:-12s"><div class="ob-moon mint" style="width:54px;height:54px;transform:translateX(520px) scaleY(3.25);margin-left:-27px;margin-top:-27px"></div></div></div></div>
+      <div class="ob-moon-arm"><div style="transform:scaleY(0.3203)"><div class="ob-moon-arm-rot" style="animation-duration:74s;animation-delay:-40s"><div class="ob-moon dark" style="width:30px;height:30px;transform:translateX(640px) scaleY(3.12);margin-left:-15px;margin-top:-15px"></div></div></div></div>
+      <div class="ob-moon-arm"><div style="transform:scaleY(0.3203)"><div class="ob-moon-arm-rot" style="animation-duration:74s;animation-delay:-28s"><div class="ob-moon" style="width:44px;height:44px;transform:translateX(640px) scaleY(3.12);margin-left:-22px;margin-top:-22px"></div></div></div></div>
+      <div class="ob-moon-arm"><div style="transform:scaleY(0.315)"><div class="ob-moon-arm-rot" style="animation-duration:96s;animation-delay:-66s"><div class="ob-moon dark" style="width:22px;height:22px;transform:translateX(800px) scaleY(3.17);margin-left:-11px;margin-top:-11px"></div></div></div></div>
+      <div class="ob-moon-arm"><div style="transform:scaleY(0.315)"><div class="ob-moon-arm-rot" style="animation-duration:96s;animation-delay:-10s"><div class="ob-moon" style="width:34px;height:34px;transform:translateX(800px) scaleY(3.17);margin-left:-17px;margin-top:-17px"></div></div></div></div>
+      <div class="ob-moon-arm"><div style="transform:scaleY(0.315)"><div class="ob-moon-arm-rot" style="animation-duration:96s;animation-delay:-82s"><div class="ob-moon dark" style="width:16px;height:16px;transform:translateX(800px) scaleY(3.17);margin-left:-8px;margin-top:-8px"></div></div></div></div>
+    </div>
+
+    <!-- satellites -->
+    <div class="ob-sat ob-sat-a"><svg width="54" height="54" viewBox="0 0 54 54" fill="none">
+      <defs><linearGradient id="satA" x1="0" y1="0" x2="54" y2="54"><stop offset="0%" stop-color="#e9e5ff"/><stop offset="100%" stop-color="#8b5cf6"/></linearGradient></defs>
+      <g transform="rotate(24 27 27)">
+        <rect x="10" y="21" width="10" height="14" rx="2" fill="url(#satA)" opacity="0.9"/>
+        <rect x="34" y="21" width="10" height="14" rx="2" fill="url(#satA)" opacity="0.9"/>
+        <rect x="21" y="20" width="12" height="16" rx="3" fill="#2a2150" stroke="rgba(196,181,253,0.7)" stroke-width="1.2"/>
+        <line x1="20" y1="28" x2="10" y2="28" stroke="rgba(196,181,253,0.6)" stroke-width="1.4"/>
+        <line x1="34" y1="28" x2="44" y2="28" stroke="rgba(196,181,253,0.6)" stroke-width="1.4"/>
+        <circle cx="27" cy="14" r="2.4" fill="#67e8f9"/>
+        <line x1="27" y1="16.5" x2="27" y2="20" stroke="rgba(103,232,249,0.7)" stroke-width="1.2"/>
+      </g></svg>
+    </div>
+    <div class="ob-sat ob-sat-b"><svg width="46" height="46" viewBox="0 0 54 54" fill="none">
+      <defs><linearGradient id="satB" x1="0" y1="0" x2="54" y2="54"><stop offset="0%" stop-color="#e9e5ff"/><stop offset="100%" stop-color="#8b5cf6"/></linearGradient></defs>
+      <g transform="rotate(-18 27 27)">
+        <rect x="10" y="21" width="10" height="14" rx="2" fill="url(#satB)" opacity="0.9"/>
+        <rect x="34" y="21" width="10" height="14" rx="2" fill="url(#satB)" opacity="0.9"/>
+        <rect x="21" y="20" width="12" height="16" rx="3" fill="#2a2150" stroke="rgba(196,181,253,0.7)" stroke-width="1.2"/>
+        <circle cx="27" cy="14" r="2.4" fill="#6ee7b7"/>
+      </g></svg>
+    </div>
+  </div>
+
+  <!-- hero copy -->
+  <div class="ob-hero-inner">
+    <a class="ob-pill" href="#get-started" style="text-decoration:none;">
+      <span class="ob-pill-tag">New</span>
+      Your Academic Universe
+      <span class="ob-pill-arrow">&#8594;</span>
+    </a>
+    <h1 class="ob-h1">
+      Your college life,
+      <span class="ob-h1-gradient">in one place</span>
+    </h1>
+    <p class="ob-sub">
+      Manage your schedule, track your progress, and stay ahead
+      with a personal academic operating system.
+    </p>
+    <div class="ob-cta-row" id="get-started">
+      <a class="ob-btn ob-btn-white" href="#get-started" data-auth="signup">Get started &#8594;</a>
+      <a class="ob-btn ob-btn-ghost" href="#ob-features" style="text-decoration:none;">See features</a>
+    </div>
+  </div>
+
+  <!-- floating feature cards (desktop composition) -->
+  <div class="ob-hero-cards-desktop">
+    <div class="ob-card ob-float ob-hero-card ob-c1" style="--fd:0s">
+      <span class="ob-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="4" width="18" height="18" rx="3"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></span>
+      <span><span class="ob-card-title" style="display:block">Class Schedule</span><span class="ob-card-sub" style="display:block">Know what's next</span></span>
+    </div>
+    <div class="ob-card ob-float ob-hero-card ob-c2" style="--fd:-2.5s">
+      <span class="ob-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 3v18h18"/><path d="M7 15v3M12 10v8M17 6v12"/></svg></span>
+      <span><span class="ob-card-title" style="display:block">Track Progress</span><span class="ob-card-sub" style="display:block">Perform better</span></span>
+    </div>
+    <div class="ob-card ob-float ob-hero-card ob-c3" style="--fd:-5s">
+      <span class="ob-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M9 13h6M9 17h6"/></svg></span>
+      <span><span class="ob-card-title" style="display:block">Assignments</span><span class="ob-card-sub" style="display:block">Never miss a deadline</span></span>
+    </div>
+    <div class="ob-card ob-float ob-hero-card ob-c4" style="--fd:-7.5s">
+      <span class="ob-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></span>
+      <span><span class="ob-card-title" style="display:block">Set Goals</span><span class="ob-card-sub" style="display:block">Stay consistent</span></span>
+    </div>
+    <div class="ob-card ob-float ob-hero-card ob-c5" style="--fd:-3.6s">
+      <span class="ob-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21.2 15.9A10 10 0 1 1 8 2.8"/><path d="M22 12A10 10 0 0 0 12 2v10z"/></svg></span>
+      <span><span class="ob-card-title" style="display:block">Tests &amp; Marks</span><span class="ob-card-sub" style="display:block">See your growth</span></span>
+    </div>
+    <div class="ob-card ob-float ob-hero-card ob-c6" style="--fd:-6.1s">
+      <span class="ob-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></span>
+      <span><span class="ob-card-title" style="display:block">Study Planner</span><span class="ob-card-sub" style="display:block">Plan smarter</span></span>
+    </div>
+  </div>
+
+  <!-- mobile card grid -->
+  <div class="ob-hero-cards-mobile">
+    <div class="ob-card ob-hero-card"><span class="ob-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="4" width="18" height="18" rx="3"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></span><span><span class="ob-card-title" style="display:block">Class Schedule</span><span class="ob-card-sub" style="display:block">Know what's next</span></span></div>
+    <div class="ob-card ob-hero-card"><span class="ob-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 3v18h18"/><path d="M7 15v3M12 10v8M17 6v12"/></svg></span><span><span class="ob-card-title" style="display:block">Track Progress</span><span class="ob-card-sub" style="display:block">Perform better</span></span></div>
+    <div class="ob-card ob-hero-card"><span class="ob-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg></span><span><span class="ob-card-title" style="display:block">Assignments</span><span class="ob-card-sub" style="display:block">Never miss a deadline</span></span></div>
+    <div class="ob-card ob-hero-card"><span class="ob-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></span><span><span class="ob-card-title" style="display:block">Set Goals</span><span class="ob-card-sub" style="display:block">Stay consistent</span></span></div>
+    <div class="ob-card ob-hero-card"><span class="ob-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21.2 15.9A10 10 0 1 1 8 2.8"/><path d="M22 12A10 10 0 0 0 12 2v10z"/></svg></span><span><span class="ob-card-title" style="display:block">Tests &amp; Marks</span><span class="ob-card-sub" style="display:block">See your growth</span></span></div>
+    <div class="ob-card ob-hero-card"><span class="ob-card-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></span><span><span class="ob-card-title" style="display:block">Study Planner</span><span class="ob-card-sub" style="display:block">Plan smarter</span></span></div>
+  </div>
+</header>
+
+<!-- ================= SECTIONS ================= -->
+<main>
+  <section class="ob-sec" id="ob-about">
+    <div class="ob-sec-head center ob-reveal">
+      <span class="ob-kicker">One system</span>
+      <h2 class="ob-h2">Your academic universe, connected</h2>
+      <p class="ob-lead">Most students juggle five apps and a pile of notebooks. Orbit puts your classes, deadlines, marks, attendance and study time into a single system — where every piece of information updates everything else.</p>
+    </div>
+    <div class="ob-band">
+      <div class="ob-reveal"><b>1</b><span>connected workspace</span></div>
+      <div class="ob-reveal" style="--rd:.08s"><b>13+</b><span>event &amp; task types</span></div>
+      <div class="ob-reveal" style="--rd:.16s"><b>100%</b><span>of your marks tracked</span></div>
+      <div class="ob-reveal" style="--rd:.24s"><b>0</b><span>deadlines missed</span></div>
+    </div>
+  </section>
+
+  <section id="ob-features">
+    <div class="ob-sec">
+      <div class="ob-sec-head center ob-reveal">
+        <span class="ob-kicker">Features</span>
+        <h2 class="ob-h2">Everything in your orbit</h2>
+        <p class="ob-lead">Eight connected modules. Add information once — your dashboard, analytics, reminders and AI assistant stay in sync automatically.</p>
+      </div>
+      <div class="ob-grid">
+        <div class="ob-feat ob-reveal"><div class="ob-feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="4" width="18" height="18" rx="3"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></div><h3>Class Schedule</h3><p>Recurring weekly timetable with live upcoming / ongoing / completed status on your dashboard.</p></div>
+        <div class="ob-feat ob-reveal" style="--rd:.07s"><div class="ob-feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="4" width="18" height="18" rx="3"/><path d="M16 2v4M8 2v4M3 10h18"/><path d="M9 16l2-2 4 4"/></svg></div><h3>Academic Calendar</h3><p>Semester dates, exams, holidays and deadlines with automatic countdowns and CSV import.</p></div>
+        <div class="ob-feat ob-reveal" style="--rd:.14s"><div class="ob-feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M9 13h6M9 17h6"/></svg></div><h3>Tests &amp; Marks</h3><p>Percentages, subject averages and honest trends — calculated instantly from your marks.</p></div>
+        <div class="ob-feat ob-reveal" style="--rd:.21s"><div class="ob-feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M9 13h6"/></svg></div><h3>Assignments</h3><p>Overdue, today and this-week buckets with priorities, statuses and submission links.</p></div>
+        <div class="ob-feat ob-reveal" style="--rd:.28s"><div class="ob-feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21.2 15.9A10 10 0 1 1 8 2.8"/><path d="M22 12A10 10 0 0 0 12 2v10z"/></svg></div><h3>Attendance</h3><p>Per-subject percentages, what-if projections and a classes-to-target calculator.</p></div>
+        <div class="ob-feat ob-reveal" style="--rd:.35s"><div class="ob-feat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></div><h3>Goals</h3><p>Set targets for marks, attendance or study hours — auto-linked goals track themselves.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="ob-sec" id="ob-students">
+    <div class="ob-sec-head center ob-reveal">
+      <span class="ob-kicker">For Students</span>
+      <h2 class="ob-h2">Built for how college actually works</h2>
+      <p class="ob-lead">One account, your data only, private by design. Start with your subjects, import your calendar, add your timetable — Orbit grows more useful every week.</p>
+    </div>
+    <div class="ob-band">
+      <div class="ob-reveal"><b>&#9729;</b><span>Cloud-synced &amp; private</span></div>
+      <div class="ob-reveal" style="--rd:.08s"><b>&#8984;K</b><span>Search everything</span></div>
+      <div class="ob-reveal" style="--rd:.16s"><b>CSV</b><span>Import &amp; export</span></div>
+      <div class="ob-reveal" style="--rd:.24s"><b>AI</b><span>Grounded assistant</span></div>
+    </div>
+  </section>
+
+  <section class="ob-final">
+    <div class="ob-final-glow"></div>
+    <div class="ob-sec-head center ob-reveal" style="position:relative;z-index:2;">
+      <svg width="44" height="44" viewBox="0 0 32 32" fill="none" style="margin-bottom:10px;">
+        <circle cx="16" cy="16" r="15" fill="url(#mg1)"/><circle cx="16" cy="16" r="7.2" fill="url(#mb1)"/>
+        <ellipse cx="16" cy="16" rx="13.5" ry="4.6" stroke="url(#mr1)" stroke-width="1.9" transform="rotate(-18 16 16)" opacity="0.95"/>
+      </svg>
+      <h2 class="ob-h2">Enter your academic universe</h2>
+      <p class="ob-lead" style="margin:18px auto 0;">Free to start. Your college life, in one place.</p>
+      <div class="ob-cta-row" style="justify-content:center;">
+        <a class="ob-btn ob-btn-white" href="#ob-top">Get started &#8594;</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="ob-footer">
+  <span style="display:inline-flex;align-items:center;gap:8px;">
+    <svg width="20" height="20" viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="7.2" fill="url(#mb1)"/><ellipse cx="16" cy="16" rx="13.5" ry="4.6" stroke="url(#mr1)" stroke-width="1.9" transform="rotate(-18 16 16)"/></svg>
+    Orbit — your academic universe
+  </span>
+  <div class="ob-footer-links">
+    <a href="#ob-features">Features</a>
+    <a href="#ob-students">For Students</a>
+    <a href="#ob-about">About</a>
+  </div>
+  <span>&#169; 2026 Orbit</span>
+</footer>
+
+<script>
+/* ---------------- starfield ---------------- */
+(function () {
+  var canvas = document.getElementById('stars');
+  var ctx = canvas.getContext('2d');
+  var dpr = Math.min(window.devicePixelRatio || 1, 2);
+  var stars = [], w = 0, h = 0, raf = 0;
+
+  function build() {
+    w = canvas.clientWidth; h = canvas.clientHeight;
+    canvas.width = w * dpr; canvas.height = h * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    var count = Math.floor((w * h) / 5200);
+    stars = [];
+    for (var i = 0; i < count; i++) {
+      stars.push({
+        x: Math.random() * w, y: Math.random() * h,
+        r: Math.random() < 0.85 ? Math.random() * 1.1 + 0.3 : Math.random() * 1.6 + 0.9,
+        base: Math.random() * 0.5 + 0.25,
+        amp: Math.random() * 0.45 + 0.1,
+        speed: Math.random() * 0.0012 + 0.0004,
+        phase: Math.random() * Math.PI * 2,
+        hue: Math.random()
+      });
+    }
+  }
+  function tint(hue) {
+    if (hue < 0.72) return '255,255,255';
+    if (hue < 0.87) return '196,181,253';
+    return '103,232,249';
+  }
+  function draw(t) {
+    ctx.clearRect(0, 0, w, h);
+    for (var i = 0; i < stars.length; i++) {
+      var s = stars[i];
+      var a = Math.max(0.05, Math.min(1, s.base + Math.sin(t * s.speed + s.phase) * s.amp));
+      ctx.beginPath(); ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(' + tint(s.hue) + ',' + a + ')'; ctx.fill();
+      if (s.r > 1.25) {
+        ctx.beginPath(); ctx.arc(s.x, s.y, s.r * 3.2, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(' + tint(s.hue) + ',' + (a * 0.08) + ')'; ctx.fill();
+      }
+    }
+    raf = requestAnimationFrame(draw);
+  }
+  build(); raf = requestAnimationFrame(draw);
+  window.addEventListener('resize', build);
+})();
+
+/* ---------------- scroll reveal ---------------- */
+(function () {
+  var els = document.querySelectorAll('.ob-reveal');
+  if (!('IntersectionObserver' in window)) {
+    els.forEach(function (e) { e.classList.add('in'); });
+    return;
+  }
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (en) {
+      if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
+    });
+  }, { threshold: 0.14 });
+  els.forEach(function (el) { io.observe(el); });
+})();
+
+/* ---------------- reduced motion ---------------- */
+if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  document.querySelectorAll('.ob-float,.ob-nebula,.ob-planet,.ob-ring-spin,.ob-moon-arm-rot,.ob-sat,.ob-comet')
+    .forEach(function (el) { el.style.animation = 'none'; });
+}
+</script>
+</body>
+</html>

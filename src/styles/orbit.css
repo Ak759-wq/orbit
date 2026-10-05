@@ -1,0 +1,1058 @@
+/* ============================================================
+   Orbit design system — premium academic OS component classes.
+   Loaded after Tailwind; complements (never modifies) the legacy
+   tokens the LOCKED sidebar depends on: ink, cream, the brutal
+   palette and the nb- prefixed classes.
+   Visual language: soft rounded surfaces, subtle borders, very
+   soft shadows, pastel accents, Orbit purple primary.
+   ============================================================ */
+
+:root {
+  --or-purple: #8b5cf6;
+  --or-purple-deep: #7c3aed;
+  --or-bright-purple: #a78bfa;
+  --or-blue: #38bdf8;
+  --or-green: #34d399;
+  --or-orange: #f59e0b;
+  --or-coral: #fb7185;
+  --or-yellow: #f59e0b;
+  --or-purple-soft: #312e81;
+  --or-lavender-soft: #4c1d95;
+  --or-blue-soft: #0b3a5b;
+  --or-green-soft: #0f3f30;
+  --or-coral-soft: #4c1d2b;
+  --or-orange-soft: #4a2c07;
+  --or-yellow-soft: #453407;
+  --or-text: #f8fafc;
+  --or-text-soft: #cbd5e1;
+  --or-text-mute: #94a3b8;
+  --or-border: rgba(139, 92, 246, 0.18);
+  --or-border-strong: #312e81;
+  --or-surface: #0f172a;
+  --or-surface-2: #111827;
+  --or-card: #0c1428;
+  --or-bg: #070b16;
+  --or-deep: #050816;
+  --or-mid: #0b1024;
+  --or-shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.06), 0 1px 3px rgba(15, 23, 42, 0.06);
+  --or-shadow-md: 0 2px 4px rgba(15, 23, 42, 0.06), 0 8px 24px rgba(15, 23, 42, 0.08);
+  --or-shadow-lg: 0 4px 12px rgba(15, 23, 42, 0.10), 0 16px 40px rgba(15, 23, 42, 0.14);
+  --or-radius: 18px;
+  --or-radius-sm: 12px;
+  --or-ease: cubic-bezier(0.33, 1, 0.68, 1);
+}
+
+/* ---------------- Surfaces ---------------- */
+/* Premium dark academic cards: deep navy body, one luminous violet hairline,
+   a top inner highlight for depth, and a long soft drop shadow. No heavy
+   outlines, no glassmorphism. */
+.or-card {
+  position: relative;
+  background: var(--or-card);
+  border: 1px solid var(--or-border);
+  border-radius: var(--or-radius);
+  box-shadow:
+    inset 0 1px 0 rgba(248, 250, 252, 0.035),
+    0 18px 40px -26px rgba(2, 6, 23, 0.95);
+}
+.or-card-hover {
+  transition: transform 0.22s var(--or-ease), box-shadow 0.22s var(--or-ease), border-color 0.22s var(--or-ease);
+}
+.or-card-hover:hover {
+  transform: translateY(-3px);
+  box-shadow:
+    inset 0 1px 0 rgba(248, 250, 252, 0.05),
+    0 26px 50px -26px rgba(2, 6, 23, 0.98),
+    0 0 0 1px rgba(139, 92, 246, 0.14),
+    0 14px 40px -22px rgba(139, 92, 246, 0.45);
+  border-color: rgba(139, 92, 246, 0.34);
+}
+
+/* ---------------- App canvas: deep space atmosphere ---------------- */
+/* Layered nebula glows + a faint two-density starfield. Applied to the
+   authenticated content column only; the landing page keeps its own art. */
+.or-app-space {
+  position: relative;
+  isolation: isolate;
+  background:
+    radial-gradient(1100px 620px at 82% -8%, rgba(139, 92, 246, 0.16) 0%, rgba(139, 92, 246, 0) 62%),
+    radial-gradient(900px 560px at 8% 4%, rgba(56, 189, 248, 0.10) 0%, rgba(56, 189, 248, 0) 58%),
+    radial-gradient(760px 620px at 50% 108%, rgba(139, 92, 246, 0.08) 0%, rgba(139, 92, 246, 0) 60%),
+    linear-gradient(180deg, #050816 0%, #070b18 46%, #0b1024 100%);
+  background-attachment: fixed;
+}
+.or-app-space::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.5;
+  background-image:
+    radial-gradient(1.4px 1.4px at 18% 22%, rgba(226, 232, 240, 0.55), transparent 60%),
+    radial-gradient(1.2px 1.2px at 63% 14%, rgba(196, 181, 253, 0.50), transparent 60%),
+    radial-gradient(1px 1px at 82% 38%, rgba(226, 232, 240, 0.38), transparent 60%),
+    radial-gradient(1.3px 1.3px at 34% 72%, rgba(167, 139, 250, 0.42), transparent 60%),
+    radial-gradient(1px 1px at 74% 84%, rgba(226, 232, 240, 0.32), transparent 60%),
+    radial-gradient(1.1px 1.1px at 47% 46%, rgba(125, 211, 252, 0.34), transparent 60%);
+  background-size: 620px 520px, 810px 690px, 540px 470px, 930px 810px, 700px 640px, 570px 510px;
+  animation: or-drift 90s linear infinite;
+}
+@keyframes or-drift {
+  from { background-position: 0 0, 0 0, 0 0, 0 0, 0 0, 0 0; }
+  to   { background-position: 620px 520px, -810px 690px, 540px -470px, -930px 810px, 700px -640px, -570px 510px; }
+}
+.or-inset {
+  background: var(--or-surface-2);
+  border: 1px solid var(--or-border);
+  border-radius: var(--or-radius-sm);
+  box-shadow: inset 0 1px 0 rgba(248, 250, 252, 0.025);
+}
+.or-inset-hover { transition: background 0.18s var(--or-ease), border-color 0.18s var(--or-ease), transform 0.18s var(--or-ease); }
+.or-inset-hover:hover { background: #182036; border-color: rgba(139, 92, 246, 0.38); transform: translateY(-1px); }
+
+/* ---------------- Stat card ---------------- */
+/* One accent per card: a glowing icon, a bottom light bar, and a hover
+   bloom in the same hue. --or-accent is set per tone below. */
+.or-stat { overflow: hidden; }
+.or-stat::after {
+  content: "";
+  position: absolute;
+  left: 12%;
+  right: 12%;
+  bottom: 0;
+  height: 2px;
+  border-radius: 999px 999px 0 0;
+  background: linear-gradient(90deg, transparent, var(--or-accent, var(--or-purple)), transparent);
+  opacity: 0.55;
+  transition: opacity 0.22s var(--or-ease), left 0.22s var(--or-ease), right 0.22s var(--or-ease);
+}
+.or-stat::before {
+  content: "";
+  position: absolute;
+  right: -30%;
+  top: -60%;
+  width: 70%;
+  height: 160%;
+  pointer-events: none;
+  background: radial-gradient(closest-side, var(--or-accent-soft, rgba(139, 92, 246, 0.20)), transparent 72%);
+  opacity: 0.55;
+  transition: opacity 0.22s var(--or-ease);
+}
+.or-stat:hover::after { opacity: 1; left: 6%; right: 6%; }
+.or-stat:hover::before { opacity: 0.95; }
+.or-stat-purple  { --or-accent: #8b5cf6;  --or-accent-soft: rgba(139, 92, 246, 0.22); }
+.or-stat-green   { --or-accent: #34d399;  --or-accent-soft: rgba(52, 211, 153, 0.20); }
+.or-stat-coral   { --or-accent: #fb7185;  --or-accent-soft: rgba(251, 113, 133, 0.20); }
+.or-stat-orange  { --or-accent: #f59e0b;  --or-accent-soft: rgba(245, 158, 11, 0.20); }
+.or-stat-blue    { --or-accent: #38bdf8;  --or-accent-soft: rgba(56, 189, 248, 0.20); }
+.or-stat-yellow  { --or-accent: #f59e0b;  --or-accent-soft: rgba(245, 158, 11, 0.20); }
+
+/* ---------------- Icon chips (pastel squares) ---------------- */
+.or-icon-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 13px;
+  flex-shrink: 0;
+  color: var(--or-text);
+}
+.or-icon-chip-sm { width: 34px; height: 34px; border-radius: 10px; }
+.or-icon-chip-lg { width: 52px; height: 52px; border-radius: 15px; }
+.or-tone-purple { background: var(--or-purple-soft); color: var(--or-bright-purple); }
+.or-tone-lavender { background: var(--or-lavender-soft); color: var(--or-bright-purple); }
+.or-tone-blue { background: var(--or-blue-soft); color: var(--or-blue); }
+.or-tone-green { background: var(--or-green-soft); color: var(--or-green); }
+.or-tone-mint { background: var(--or-green-soft); color: var(--or-green); }
+.or-tone-coral { background: var(--or-coral-soft); color: var(--or-coral); }
+.or-tone-orange { background: var(--or-orange-soft); color: var(--or-orange); }
+.or-tone-yellow { background: var(--or-yellow-soft); color: var(--or-yellow); }
+.or-tone-neutral { background: #1e293b; color: var(--or-text-soft); }
+.or-tone-solid-purple { background: var(--or-purple); color: #ffffff; }
+
+/* ---------------- Buttons ---------------- */
+.or-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  border: 1px solid transparent;
+  border-radius: var(--or-radius-sm);
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 13px;
+  line-height: 1;
+  padding: 10px 16px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.16s var(--or-ease), color 0.16s var(--or-ease), box-shadow 0.16s var(--or-ease), transform 0.16s var(--or-ease), border-color 0.16s var(--or-ease);
+}
+.or-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.or-btn:active:not(:disabled) { transform: scale(0.98); }
+.or-btn-primary { background: var(--or-purple); color: #ffffff; box-shadow: 0 1px 2px rgba(139, 92, 246, 0.35); }
+.or-btn-primary:hover:not(:disabled) { background: var(--or-purple-deep); box-shadow: 0 4px 14px rgba(139, 92, 246, 0.32); }
+.or-btn-soft { background: var(--or-purple-soft); color: var(--or-bright-purple); }
+.or-btn-soft:hover:not(:disabled) { background: var(--or-lavender-soft); }
+.or-btn-ghost { background: transparent; color: var(--or-text-soft); }
+.or-btn-ghost:hover:not(:disabled) { background: #1e293b; color: var(--or-text); }
+.or-btn-outline { background: var(--or-surface); color: var(--or-text); border-color: var(--or-border-strong); box-shadow: var(--or-shadow-xs, 0 1px 2px rgba(15,23,42,0.06)); }
+.or-btn-outline:hover:not(:disabled) { border-color: #4338ca; background: #0b1120; }
+.or-btn-danger { background: var(--or-coral-soft); color: var(--or-coral); }
+.or-btn-danger:hover:not(:disabled) { background: #6b1d33; }
+.or-btn-danger-solid { background: var(--or-coral); color: #2a0710; }
+.or-btn-danger-solid:hover:not(:disabled) { background: #f43f5e; }
+.or-btn-sm { padding: 7px 12px; font-size: 12px; border-radius: 10px; }
+.or-btn-lg { padding: 12px 20px; font-size: 14px; border-radius: 14px; }
+
+/* Icon-only round buttons (header, row actions) */
+.or-iconbtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--or-text-soft);
+  cursor: pointer;
+  position: relative;
+  transition: background 0.16s var(--or-ease), color 0.16s var(--or-ease);
+}
+.or-iconbtn:hover { background: #1e293b; color: var(--or-text); }
+.or-iconbtn-bordered { background: var(--or-surface); border-color: var(--or-border); box-shadow: var(--or-shadow-sm, 0 1px 2px rgba(15,23,42,0.06)); }
+.or-iconbtn-bordered:hover { border-color: var(--or-border-strong); }
+
+/* ---------------- Pills & badges ---------------- */
+.or-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  line-height: 1.5;
+  white-space: nowrap;
+}
+.or-chip-purple { background: var(--or-purple-soft); color: var(--or-bright-purple); }
+.or-chip-blue { background: var(--or-blue-soft); color: var(--or-blue); }
+.or-chip-green { background: var(--or-green-soft); color: var(--or-green); }
+.or-chip-coral { background: var(--or-coral-soft); color: var(--or-coral); }
+.or-chip-orange { background: var(--or-orange-soft); color: var(--or-orange); }
+.or-chip-yellow { background: var(--or-yellow-soft); color: var(--or-yellow); }
+.or-chip-neutral { background: #1e293b; color: var(--or-text-soft); }
+.or-chip-outline { background: transparent; border: 1px solid var(--or-border-strong); color: var(--or-text-soft); }
+
+.or-kicker {
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--or-text-mute);
+}
+
+/* View-all pill in section headers */
+.or-pill-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 13px;
+  border-radius: 999px;
+  background: var(--or-purple-soft);
+  color: var(--or-bright-purple);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: background 0.16s var(--or-ease), box-shadow 0.16s var(--or-ease);
+  white-space: nowrap;
+}
+.or-pill-link:hover { background: var(--or-lavender-soft); box-shadow: 0 2px 8px rgba(139, 92, 246, 0.28); }
+/* Compact variant for narrow section headers so the title never truncates. */
+.or-pill-link-sm { padding: 5px 10px; font-size: 11.5px; gap: 4px; }
+
+/* ---------------- Segmented tab control ---------------- */
+.or-seg {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 2px;
+  padding: 3px;
+  background: #1e293b;
+  border-radius: 12px;
+}
+.or-seg > button {
+  border: 0;
+  background: transparent;
+  padding: 7px 14px;
+  border-radius: 9px;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--or-text-soft);
+  cursor: pointer;
+  transition: background 0.16s var(--or-ease), color 0.16s var(--or-ease), box-shadow 0.16s var(--or-ease);
+  white-space: nowrap;
+}
+.or-seg > button:hover { color: var(--or-text); }
+.or-seg > button.on {
+  background: var(--or-purple-soft);
+  color: var(--or-bright-purple);
+  box-shadow: var(--or-shadow-sm);
+}
+
+/* ---------------- Inputs ---------------- */
+.or-input, .or-select, .or-textarea {
+  width: 100%;
+  border: 1px solid var(--or-border-strong);
+  background: var(--or-surface);
+  border-radius: var(--or-radius-sm);
+  padding: 9px 12px;
+  font-family: inherit;
+  font-size: 13.5px;
+  color: var(--or-text);
+  outline: none;
+  transition: border-color 0.16s var(--or-ease), box-shadow 0.16s var(--or-ease);
+}
+.or-input::placeholder, .or-textarea::placeholder { color: #64748b; }
+.or-input:focus, .or-select:focus, .or-textarea:focus {
+  border-color: var(--or-purple);
+  box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.14);
+}
+.or-label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--or-text-soft);
+  margin-bottom: 5px;
+}
+.or-search {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  height: 42px;
+  padding: 0 8px 0 16px;
+  border-radius: 999px;
+  background: #131c30;
+  border: 1px solid var(--or-border);
+  color: var(--or-text-mute);
+  cursor: pointer;
+  transition: background 0.16s var(--or-ease), border-color 0.16s var(--or-ease), box-shadow 0.16s var(--or-ease);
+  font-size: 13.5px;
+}
+.or-search:hover { background: #1a2440; border-color: var(--or-border-strong); }
+.or-search:focus-visible { background: #1a2440; border-color: var(--or-purple); box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.20); }
+
+/* ---------------- Table ---------------- */
+.or-table { width: 100%; border-collapse: collapse; }
+.or-table th {
+  text-align: left;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--or-text-muted);
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--or-border-strong);
+  white-space: nowrap;
+}
+.or-table td {
+  padding: 12px 14px;
+  font-size: 13px;
+  color: var(--or-text);
+  border-bottom: 1px solid #1e293b;
+  vertical-align: middle;
+}
+.or-table tbody tr { transition: background 0.14s var(--or-ease); }
+.or-table tbody tr:hover { background: #1e293b; }
+.or-table tbody tr:last-child td { border-bottom: 0; }
+
+/* ---------------- Progress ---------------- */
+.or-progress {
+  height: 8px;
+  border-radius: 999px;
+  background: #1e293b;
+  overflow: hidden;
+}
+.or-progress > div {
+  height: 100%;
+  border-radius: 999px;
+  background: var(--or-purple);
+  transition: width 0.35s var(--or-ease);
+}
+.or-progress-sm { height: 6px; }
+.or-progress-lg { height: 12px; }
+
+/* ---------------- Timeline (Academic Radar, calendar timeline) ---------------- */
+.or-timeline { position: relative; }
+.or-timeline::before {
+  content: "";
+  position: absolute;
+  left: 19px;
+  top: 12px;
+  bottom: 12px;
+  width: 2px;
+  background: var(--or-border-strong);
+  border-radius: 2px;
+}
+.or-timeline-item { position: relative; display: flex; gap: 14px; align-items: flex-start; }
+.or-timeline-dot {
+  position: relative;
+  z-index: 1;
+  width: 40px;
+  height: 40px;
+  border-radius: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 0 0 4px var(--or-surface);
+}
+
+/* ---------------- Empty states ---------------- */
+.or-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 36px 20px;
+}
+.or-empty-icon {
+  width: 74px;
+  height: 74px;
+  border-radius: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 14px;
+  background: radial-gradient(120% 120% at 30% 20%, rgba(139, 92, 246, 0.30), rgba(11, 16, 36, 0.9));
+  border: 1px solid rgba(139, 92, 246, 0.30);
+  color: var(--or-bright-purple);
+  box-shadow:
+    0 0 0 8px rgba(139, 92, 246, 0.05),
+    0 18px 40px -22px rgba(139, 92, 246, 0.9);
+  position: relative;
+}
+/* Soft halo ring behind the empty-state glyph. */
+.or-empty-icon::after {
+  content: "";
+  position: absolute;
+  inset: -14px;
+  border-radius: 32px;
+  background: radial-gradient(closest-side, rgba(139, 92, 246, 0.20), transparent 72%);
+  z-index: -1;
+  animation: or-halo 4.2s ease-in-out infinite;
+}
+@keyframes or-halo {
+  0%, 100% { opacity: 0.45; transform: scale(0.96); }
+  50%      { opacity: 0.9; transform: scale(1.06); }
+}
+
+/* ---------------- Skeletons ---------------- */
+.or-skeleton {
+  border-radius: 10px;
+  background: linear-gradient(90deg, #1e293b 25%, #0f172a 40%, #1e293b 60%);
+  background-size: 800px 100%;
+  animation: orbitShimmer 1.4s linear infinite;
+}
+
+/* ---------------- Modal ---------------- */
+.or-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.55);
+  backdrop-filter: blur(6px);
+  z-index: 70;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 5vh 16px 16px;
+  overflow-y: auto;
+}
+.or-modal {
+  background: var(--or-surface);
+  border-radius: 20px;
+  box-shadow: var(--or-shadow-lg);
+  border: 1px solid var(--or-border-strong);
+  animation: riseIn 0.2s var(--or-ease) both;
+}
+
+/* ---------------- Dashboard hero ---------------- */
+/* Cinematic space banner: violet nebula upper-right, cyan wash lower-left,
+   a deep navy body and one luminous hairline. The scene art is an SVG
+   layer inside .or-hero-scene, so text always sits on quiet pixels. */
+.or-hero {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  border-radius: 24px;
+  min-height: 250px;
+  background:
+    radial-gradient(90% 130% at 84% 6%, rgba(139, 92, 246, 0.34) 0%, rgba(139, 92, 246, 0.05) 42%, rgba(139, 92, 246, 0) 68%),
+    radial-gradient(70% 120% at 4% 96%, rgba(56, 189, 248, 0.20) 0%, rgba(56, 189, 248, 0) 62%),
+    radial-gradient(60% 90% at 58% 118%, rgba(167, 139, 250, 0.14) 0%, rgba(167, 139, 250, 0) 70%),
+    linear-gradient(118deg, #070b18 0%, #0b1024 44%, #111a38 74%, #0b1024 100%);
+  border: 1px solid rgba(139, 92, 246, 0.22);
+  box-shadow:
+    inset 0 1px 0 rgba(248, 250, 252, 0.05),
+    0 30px 70px -40px rgba(139, 92, 246, 0.55),
+    0 18px 50px -30px rgba(2, 6, 23, 1);
+}
+/* Atmospheric film grain + vignette so the banner reads as depth, not a
+   flat gradient panel. */
+.or-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background:
+    radial-gradient(120% 100% at 50% 0%, transparent 46%, rgba(3, 6, 18, 0.55) 100%),
+    linear-gradient(90deg, rgba(5, 8, 22, 0.72) 0%, rgba(5, 8, 22, 0.28) 46%, transparent 72%);
+}
+.or-hero > * { position: relative; z-index: 3; }
+
+/* Slowly rotating orbital rings around the hero planet. */
+.or-hero-orbit { transform-origin: 372px 112px; animation: or-spin 68s linear infinite; }
+.or-hero-orbit-rev { transform-origin: 372px 112px; animation: or-spin-rev 96s linear infinite; }
+@keyframes or-spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+@keyframes or-spin-rev { from { transform: rotate(360deg); } to { transform: rotate(0deg); } }
+
+.or-hero-scene {
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+  width: 62%;
+  z-index: 1;
+  pointer-events: none;
+}
+.or-hero-rec {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 12px 16px;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.18s var(--or-ease), box-shadow 0.18s var(--or-ease), transform 0.18s var(--or-ease);
+  box-shadow: 0 2px 10px rgba(139, 92, 246, 0.10);
+}
+.or-hero-rec:hover {
+  background: rgba(255, 255, 255, 0.11);
+  border-color: rgba(167, 139, 250, 0.42);
+  box-shadow: 0 10px 34px -14px rgba(139, 92, 246, 0.75);
+  transform: translateY(-2px);
+}
+
+/* Floating decorative stars in the hero */
+.or-star--twinkle { animation: or-twinkle 3.6s ease-in-out infinite; }
+@keyframes or-twinkle {
+  0%, 100% { opacity: 0.25; transform: scale(0.8); }
+  50%      { opacity: 0.95; transform: scale(1.15); }
+}
+.or-star { position: absolute; border-radius: 999px; background: #ffffff; opacity: 0.85; animation: pulseGlow 3.2s ease-in-out infinite; }
+
+/* ---------------- Toast ---------------- */
+.or-toast {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 90;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  background: #111827;
+  color: #f8fafc;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 12px 18px;
+  border-radius: 14px;
+  box-shadow: var(--or-shadow-lg);
+  animation: riseIn 0.22s var(--or-ease) both;
+  max-width: min(420px, calc(100vw - 40px));
+}
+
+/* ---------------- Avatar ---------------- */
+.or-avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: linear-gradient(140deg, #8b5cf6, #a78bfa);
+  color: #ffffff;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+/* ---------------- Calendar ---------------- */
+.or-cal-cell {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 11px;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--or-text);
+  background: transparent;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: background 0.15s var(--or-ease), border-color 0.15s var(--or-ease), box-shadow 0.15s var(--or-ease);
+  min-height: 38px;
+}
+.or-cal-cell:hover { background: rgba(139, 92, 246, 0.16); }
+.or-cal-cell.dim { color: #64748b; }
+.or-cal-cell.dim:hover { background: rgba(139, 92, 246, 0.10); }
+.or-cal-cell.today {
+  background: var(--or-purple);
+  color: #ffffff;
+  font-weight: 800;
+  box-shadow: 0 3px 10px rgba(109, 92, 232, 0.35);
+}
+.or-cal-cell.sel { border-color: var(--or-purple); box-shadow: 0 0 0 2px rgba(109, 92, 232, 0.18); }
+.or-cal-dots {
+  position: absolute;
+  bottom: 3px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 2px;
+}
+.or-cal-dot { width: 4px; height: 4px; border-radius: 999px; }
+
+/* Full-page month grid: taller cells that list event titles inline. */
+.or-month-cell {
+  border-radius: 12px;
+  border: 1px solid var(--or-border-strong);
+  background: var(--or-surface);
+  padding: 6px;
+  min-height: 76px;
+  transition: border-color 0.16s var(--or-ease), box-shadow 0.16s var(--or-ease), background 0.16s var(--or-ease);
+}
+.or-month-cell:hover { border-color: var(--or-border-strong); box-shadow: var(--or-shadow-sm); }
+.or-month-cell.today { border-color: rgba(139, 92, 246, 0.45); background: rgba(139, 92, 246, 0.06); }
+.or-month-cell.dim { border-color: transparent; background: var(--or-bg); }
+.or-month-pill {
+  display: block;
+  font-size: 9.5px;
+  font-weight: 700;
+  line-height: 1.35;
+  padding: 2px 6px;
+  border-radius: 6px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  transition: filter 0.16s var(--or-ease);
+}
+.or-month-pill:hover { filter: brightness(0.96); }
+
+/* Schedule grid */
+.or-slot {
+  border-radius: 12px;
+  border: 1px solid var(--or-border-strong);
+  background: var(--or-surface);
+  box-shadow: var(--or-shadow-xs, 0 1px 2px rgba(15, 23, 42, 0.06));
+  overflow: hidden;
+  transition: box-shadow 0.16s var(--or-ease), border-color 0.16s var(--or-ease), transform 0.16s var(--or-ease);
+}
+.or-slot:hover { box-shadow: var(--or-shadow-md); border-color: var(--or-border-strong); }
+.or-slot-ongoing {
+  border-color: rgba(109, 92, 232, 0.55);
+  box-shadow: 0 0 0 3px rgba(109, 92, 232, 0.14), var(--or-shadow-sm);
+}
+
+/* Live "now" pulse dot */
+.or-live-dot { position: relative; width: 8px; height: 8px; border-radius: 999px; background: var(--or-green); flex-shrink: 0; }
+.or-live-dot::after {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  border-radius: 999px;
+  background: rgba(52, 211, 153, 0.35);
+  animation: orbitPing 1.8s var(--or-ease) infinite;
+}
+@keyframes orbitPing {
+  0% { transform: scale(0.6); opacity: 1; }
+  80%, 100% { transform: scale(1.8); opacity: 0; }
+}
+
+/* Notification badge ping */
+.or-notif-dot {
+  position: absolute;
+  top: 6px;
+  right: 7px;
+  min-width: 16px;
+  height: 16px;
+  padding: 0 4px;
+  border-radius: 999px;
+  background: var(--or-coral);
+  color: #ffffff;
+  font-size: 9px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--or-surface);
+}
+
+/* Goal / attendance animated rings */
+.or-ring-bg { stroke: #1e293b; }
+.or-ring-fg { transition: stroke-dasharray 0.5s var(--or-ease); }
+
+/* Sticky list header inside cards */
+.or-card-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 18px;
+  border-bottom: 1px solid var(--or-border-strong);
+}
+
+/* Text link */
+.or-link { color: var(--or-bright-purple); font-weight: 600; text-decoration: none; }
+.or-link:hover { text-decoration: underline; }
+
+/* ============================================================
+   Sidebar — the deep-space rail that frames every page.
+   Same visual language as the Dashboard canvas: navy/black body,
+   violet/blue nebula, drifting stars, one luminous violet seam on
+   the right edge. The nav never leaves the dark family: the active
+   item is a purple gradient with a soft glow, never a white block.
+   ============================================================ */
+.or-nav {
+  /* No `position` here on purpose: the aside carries Tailwind's `fixed`
+     (mobile) / `lg:sticky` (desktop) and this class must not override it. */
+  isolation: isolate;
+  color: var(--or-text);
+  background:
+    radial-gradient(120% 46% at 6% 0%, rgba(139, 92, 246, 0.26) 0%, rgba(139, 92, 246, 0) 58%),
+    radial-gradient(90% 40% at 104% 78%, rgba(56, 189, 248, 0.16) 0%, rgba(56, 189, 248, 0) 62%),
+    radial-gradient(120% 40% at 50% 104%, rgba(167, 139, 250, 0.14) 0%, rgba(167, 139, 250, 0) 60%),
+    linear-gradient(180deg, #070b18 0%, #0a0f22 44%, #05080f 100%);
+  border-right: 1px solid rgba(139, 92, 246, 0.26);
+  box-shadow: 14px 0 60px -44px rgba(139, 92, 246, 0.95);
+}
+/* Faint starfield, drifting far slower than the content canvas. */
+.or-nav::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.55;
+  background-image:
+    radial-gradient(1.4px 1.4px at 22% 12%, rgba(226, 232, 240, 0.55), transparent 60%),
+    radial-gradient(1.2px 1.2px at 74% 22%, rgba(196, 181, 253, 0.50), transparent 60%),
+    radial-gradient(1px 1px at 46% 42%, rgba(226, 232, 240, 0.38), transparent 60%),
+    radial-gradient(1.3px 1.3px at 16% 68%, rgba(167, 139, 250, 0.45), transparent 60%),
+    radial-gradient(1px 1px at 82% 58%, rgba(226, 232, 240, 0.34), transparent 60%),
+    radial-gradient(1.1px 1.1px at 58% 86%, rgba(125, 211, 252, 0.36), transparent 60%);
+  background-size: 320px 300px, 410px 370px, 280px 260px, 470px 420px, 360px 330px, 300px 280px;
+  animation: or-drift-nav 140s linear infinite;
+}
+@keyframes or-drift-nav {
+  from { background-position: 0 0, 0 0, 0 0, 0 0, 0 0, 0 0; }
+  to   { background-position: 320px 300px, -410px 370px, 280px -260px, -470px 420px, 360px -330px, -300px 280px; }
+}
+/* The glowing seam: a 1px violet→cyan hairline with an outer bloom. */
+.or-nav::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: -1px;
+  bottom: 0;
+  width: 1px;
+  z-index: 2;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(167, 139, 250, 0) 0%, rgba(167, 139, 250, 0.65) 16%, rgba(56, 189, 248, 0.45) 58%, rgba(139, 92, 246, 0) 100%);
+  box-shadow: 0 0 18px rgba(139, 92, 246, 0.55);
+}
+.or-nav > * { position: relative; z-index: 1; }
+
+/* Brand block */
+.or-nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 18px 18px 16px;
+  border-bottom: 1px solid rgba(139, 92, 246, 0.14);
+}
+.or-nav-logo {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 14px;
+  flex-shrink: 0;
+  background: radial-gradient(120% 120% at 32% 22%, rgba(139, 92, 246, 0.34), rgba(11, 16, 36, 0.92));
+  border: 1px solid rgba(139, 92, 246, 0.34);
+  box-shadow:
+    inset 0 1px 0 rgba(248, 250, 252, 0.06),
+    0 0 0 7px rgba(139, 92, 246, 0.05),
+    0 14px 34px -14px rgba(139, 92, 246, 0.95);
+}
+/* Slow purple orbital halo breathing behind the logo. */
+.or-nav-logo::after {
+  content: "";
+  position: absolute;
+  inset: -9px;
+  border-radius: 22px;
+  background: radial-gradient(closest-side, rgba(139, 92, 246, 0.26), transparent 72%);
+  z-index: -1;
+  animation: or-halo 4.6s ease-in-out infinite;
+}
+.or-nav-kicker {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.20em;
+  color: rgba(196, 181, 253, 0.72);
+  margin-top: 4px;
+}
+
+/* Nav list — generous rhythm, quiet until hovered. */
+.or-nav-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(139, 92, 246, 0.35) transparent;
+}
+.or-nav-scroll::-webkit-scrollbar { width: 6px; }
+.or-nav-scroll::-webkit-scrollbar-thumb { background: rgba(139, 92, 246, 0.30); border-radius: 999px; }
+
+.or-nav-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  width: 100%;
+  padding: 9px 12px;
+  border-radius: 12px;
+  border: 1px solid transparent;
+  background: transparent;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.2;
+  text-align: left;
+  color: rgba(203, 213, 225, 0.82);
+  cursor: pointer;
+  transition: background 0.16s var(--or-ease), color 0.16s var(--or-ease),
+              border-color 0.16s var(--or-ease), box-shadow 0.16s var(--or-ease);
+}
+.or-nav-item > svg { flex-shrink: 0; }
+.or-nav-item:hover {
+  background: rgba(139, 92, 246, 0.10);
+  color: var(--or-text);
+}
+.or-nav-item:focus-visible { outline: 2px solid rgba(139, 92, 246, 0.75); outline-offset: 2px; }
+
+/* Active route: purple gradient, luminous hairline, soft outer bloom,
+   bright white glyph + label. No white slab. */
+.or-nav-item.is-active {
+  color: #ffffff;
+  font-weight: 700;
+  background: linear-gradient(100deg, rgba(139, 92, 246, 0.38) 0%, rgba(109, 91, 232, 0.26) 52%, rgba(56, 189, 248, 0.18) 100%);
+  border-color: rgba(167, 139, 250, 0.42);
+  box-shadow:
+    inset 0 1px 0 rgba(248, 250, 252, 0.12),
+    0 0 0 1px rgba(139, 92, 246, 0.16),
+    0 12px 30px -14px rgba(139, 92, 246, 0.95);
+}
+.or-nav-item.is-active > svg { filter: drop-shadow(0 0 7px rgba(196, 181, 253, 0.85)); }
+.or-nav-item.is-active::before {
+  content: "";
+  position: absolute;
+  left: -1px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 20px;
+  border-radius: 0 3px 3px 0;
+  background: linear-gradient(180deg, #c4b5fd, #818cf8);
+  box-shadow: 0 0 12px rgba(139, 92, 246, 0.95);
+}
+
+/* Footer: Ask Orbit AI (route button) + muted sign out */
+.or-nav-foot {
+  padding: 14px 14px 18px;
+  border-top: 1px solid rgba(139, 92, 246, 0.14);
+  background: linear-gradient(180deg, rgba(139, 92, 246, 0) 0%, rgba(139, 92, 246, 0.07) 100%);
+}
+.or-nav-ai {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 11px 14px;
+  border-radius: 14px;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  color: #ffffff;
+  cursor: pointer;
+  background: linear-gradient(120deg, #8b5cf6 0%, #a855f7 46%, #6366f1 100%);
+  border: 1px solid rgba(196, 181, 253, 0.55);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.28),
+    0 0 0 1px rgba(139, 92, 246, 0.25),
+    0 16px 34px -16px rgba(139, 92, 246, 0.95);
+  transition: transform 0.16s var(--or-ease), box-shadow 0.16s var(--or-ease), filter 0.16s var(--or-ease);
+}
+.or-nav-ai:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.07) saturate(1.05);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.34),
+    0 0 0 1px rgba(139, 92, 246, 0.35),
+    0 20px 42px -14px rgba(139, 92, 246, 1);
+}
+.or-nav-ai:active { transform: translateY(0); }
+.or-nav-ai:focus-visible { outline: 2px solid rgba(196, 181, 253, 0.9); outline-offset: 2px; }
+.or-nav-ai > svg { filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.5)); }
+.or-nav-signout {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  width: 100%;
+  margin-top: 9px;
+  padding: 9px 12px;
+  border-radius: 12px;
+  border: 1px solid transparent;
+  background: transparent;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  color: rgba(148, 163, 184, 0.85);
+  cursor: pointer;
+  transition: background 0.16s var(--or-ease), color 0.16s var(--or-ease);
+}
+.or-nav-signout:hover { background: rgba(148, 163, 184, 0.12); color: #e2e8f0; }
+.or-nav-signout:focus-visible { outline: 2px solid rgba(139, 92, 246, 0.7); outline-offset: 2px; }
+
+/* ============================================================
+   Page furniture shared by the Assignments redesign.
+   ============================================================ */
+
+/* Compact hero: same cinematic base as .or-hero, sized for a strip. */
+.or-hero-strip { min-height: 172px; }
+.or-hero-strip .or-hero-scene { width: 46%; opacity: 0.9; }
+@media (max-width: 767px) { .or-hero-strip .or-hero-scene { display: none; } }
+@media (min-width: 768px) and (max-width: 1100px) { .or-hero-strip .or-hero-scene { width: 52%; opacity: 0.6; } }
+
+/* Orbital rings for the page strip scene (own pivot, own tempo). */
+.or-ring-spin { transform-origin: 372px 96px; animation: or-spin 62s linear infinite; }
+.or-ring-spin-rev { transform-origin: 372px 96px; animation: or-spin-rev 88s linear infinite; }
+
+/* Premium filter pills (dark navy, purple glow when active) */
+.or-pills { display: flex; flex-wrap: wrap; gap: 8px; }
+.or-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 15px;
+  border-radius: 999px;
+  border: 1px solid var(--or-border);
+  background: var(--or-surface-2);
+  color: var(--or-text-soft);
+  font-family: inherit;
+  font-size: 12.5px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.16s var(--or-ease), color 0.16s var(--or-ease),
+              border-color 0.16s var(--or-ease), box-shadow 0.16s var(--or-ease), transform 0.16s var(--or-ease);
+}
+.or-pill:hover {
+  background: #182036;
+  border-color: rgba(139, 92, 246, 0.38);
+  color: var(--or-text);
+}
+.or-pill:focus-visible { outline: 2px solid rgba(139, 92, 246, 0.75); outline-offset: 2px; }
+.or-pill .or-pill-n {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--or-text-mute);
+  background: rgba(148, 163, 184, 0.14);
+  border-radius: 999px;
+  padding: 1px 7px;
+  line-height: 1.5;
+}
+.or-pill.is-active {
+  color: #ffffff;
+  font-weight: 700;
+  background: linear-gradient(120deg, rgba(139, 92, 246, 0.92) 0%, rgba(109, 91, 232, 0.86) 52%, rgba(56, 189, 248, 0.62) 100%);
+  border-color: rgba(196, 181, 253, 0.6);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.22),
+    0 10px 26px -12px rgba(139, 92, 246, 0.95);
+}
+.or-pill.is-active .or-pill-n { color: #ffffff; background: rgba(255, 255, 255, 0.18); }
+
+/* Motivational panel beside the completion meter */
+.or-motivation {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  background:
+    radial-gradient(90% 120% at 100% 0%, rgba(139, 92, 246, 0.30) 0%, rgba(139, 92, 246, 0.05) 48%, rgba(139, 92, 246, 0) 72%),
+    linear-gradient(150deg, #0e1630 0%, #0c1428 58%, #0a1120 100%);
+}
+.or-motivation::before {
+  content: "";
+  position: absolute;
+  right: -18%;
+  top: -52%;
+  width: 62%;
+  height: 190%;
+  border-radius: 999px;
+  background: radial-gradient(closest-side, rgba(167, 139, 250, 0.22), transparent 70%);
+  pointer-events: none;
+}
+
+/* Task row: premium dark card with a subject-coloured spine. */
+.or-task {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  border-radius: 16px;
+  border: 1px solid var(--or-border);
+  background: var(--or-card);
+  box-shadow: inset 0 1px 0 rgba(248, 250, 252, 0.03);
+  overflow: hidden;
+  transition: transform 0.2s var(--or-ease), box-shadow 0.2s var(--or-ease), border-color 0.2s var(--or-ease);
+}
+.or-task::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 14%;
+  bottom: 14%;
+  width: 3px;
+  border-radius: 0 3px 3px 0;
+  background: var(--or-task-accent, var(--or-purple));
+  opacity: 0.9;
+  box-shadow: 0 0 12px var(--or-task-accent, var(--or-purple));
+}
+.or-task:hover {
+  transform: translateY(-2px);
+  border-color: rgba(139, 92, 246, 0.34);
+  box-shadow:
+    inset 0 1px 0 rgba(248, 250, 252, 0.05),
+    0 18px 36px -24px rgba(2, 6, 23, 0.95),
+    0 12px 32px -20px rgba(139, 92, 246, 0.55);
+}
+@media (max-width: 640px) {
+  .or-task { flex-wrap: wrap; gap: 10px; padding: 13px 14px; }
+}

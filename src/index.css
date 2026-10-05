@@ -1,0 +1,272 @@
+@import "tailwindcss";
+@import "./styles/orbit.css";
+
+@theme {
+  --color-paper: #f6f1e7;
+  --color-cream: #fffdf7;
+  --color-ink: #141414;
+  --color-ink-soft: #4a463d;
+  --color-ink-mute: #8a8474;
+
+  --color-brutal-purple: #7c63f5;
+  --color-brutal-purple-soft: #ddd6ff;
+  --color-brutal-yellow: #ffc900;
+  --color-brutal-lime: #a3e635;
+  --color-brutal-lime-soft: #e2f5b8;
+  --color-brutal-blue: #57a8ff;
+  --color-brutal-blue-soft: #d9ebff;
+  --color-brutal-red: #ff6b4a;
+  --color-brutal-red-soft: #ffe1d6;
+  --color-brutal-orange: #ff9e2c;
+  --color-brutal-orange-soft: #ffe8c7;
+  --color-brutal-green: #34c77b;
+  --color-brutal-green-soft: #d3f5e3;
+
+  /* ---------- Orbit design system (premium academic OS) ----------
+     Added alongside the legacy tokens above. The locked sidebar
+     still renders from the ink, cream, brutal and font-display
+     tokens, so those values must never change. Everything right
+     of the sidebar uses the orbit palette instead. */
+  --color-orbit-bg: #070b16;
+  --color-orbit-secondary: #0b1120;
+  --color-orbit-card: #0c1428;
+  --color-orbit-card-2: #111827;
+  --color-orbit-border: rgba(139, 92, 246, 0.18);
+  --color-orbit-border-strong: #312e81;
+  --color-orbit-coral: #fb7185;
+  --color-orbit-purple: #8b5cf6;
+  --color-orbit-text: #f8fafc;
+  --color-orbit-text-soft: #cbd5e1;
+  --color-orbit-text-mute: #94a3b8;
+  --color-orbit-muted: #94a3b8;
+  --color-orbit-primary: #8b5cf6;
+  --color-orbit-primary-soft: #7c3aed;
+  --color-orbit-bright-purple: #a78bfa;
+  --color-orbit-blue: #38bdf8;
+  --color-orbit-green: #34d399;
+  --color-orbit-orange: #f59e0b;
+  --color-orbit-red: #fb7185;
+
+  --color-orbit-purple-soft: #312e81;
+  --color-orbit-purple-soft-2: #4338ca;
+  --color-orbit-lavender-soft: #4c1d95;
+  --color-orbit-blue-soft: #0284bc;
+  --color-orbit-green-soft: #15803d;
+  --color-orbit-coral-soft: #be123c;
+  --color-orbit-orange-soft: #c2410c;
+  --color-orbit-yellow-soft: #a16207;
+  --color-orbit-surface: #0c1428;
+  --color-orbit-bg-2: #0f172a;
+
+  --shadow-orbit-xs: 0 1px 2px rgba(15, 23, 42, 0.06);
+  --shadow-orbit-sm: 0 1px 2px rgba(15, 23, 42, 0.08), 0 1px 3px rgba(15, 23, 42, 0.06);
+  --shadow-orbit-md: 0 2px 4px rgba(15, 23, 42, 0.06), 0 8px 24px rgba(15, 23, 42, 0.08);
+  --shadow-orbit-lg: 0 4px 12px rgba(15, 23, 42, 0.10), 0 16px 40px rgba(15, 23, 42, 0.14);
+  --shadow-orbit-pop: 0 6px 16px rgba(139, 92, 246, 0.26);
+
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-display: "Archivo", "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+
+  --animate-fade-in: fadeIn 0.2s ease-out;
+  --animate-slide-in: slideIn 0.25s ease-out;
+  --animate-pulse-glow: pulseGlow 1.6s ease-in-out infinite;
+  --animate-rise-in: riseIn 0.22s ease-out both;
+  --animate-slide-in-right: slideInRight 0.22s var(--or-ease) both;
+  --animate-skeleton: orbitShimmer 1.4s linear infinite;
+
+  @keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+  @keyframes slideIn {
+    0% { transform: translateY(4px); opacity: 0; }
+    100% { transform: translateY(0); opacity: 1; }
+  }
+  @keyframes pulseGlow {
+    0%, 100% { opacity: 0.45; }
+    50% { opacity: 1; }
+  }
+  @keyframes riseIn {
+    0% { opacity: 0; transform: translateY(6px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes orbitShimmer {
+    0% { background-position: -400px 0; }
+    100% { background-position: 400px 0; }
+  }
+  @keyframes slideInRight {
+    0% { opacity: 0; transform: translateX(14px); }
+    100% { opacity: 1; transform: translateX(0); }
+  }
+}
+
+* { box-sizing: border-box; }
+html { color-scheme: dark; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  /* Dark academic OS (Orbit redesign). The landing page and the
+     locked sidebar carry their own backgrounds, so they are unaffected. */
+  background-color: #070b16;
+  color: #f8fafc;
+  font-family: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root { min-height: 100vh; }
+
+::selection { background: #7c3aed; color: #ffffff; }
+
+/* ---------- Neobrutalist primitives (UNUSED: the sidebar is the only surface that still uses ink/cream/brutal tokens) ---------- */
+.nb-card {
+  background: #fffdf7;
+  border: 2px solid #141414;
+  box-shadow: 6px 6px 0 #141414;
+}
+.nb-card-sm {
+  background: #fffdf7;
+  border: 2px solid #141414;
+  box-shadow: 4px 4px 0 #141414;
+}
+.nb-inner {
+  background: #ffffff;
+  border: 2px solid #141414;
+}
+.nb-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 2px solid #141414;
+  font-family: "Inter", sans-serif;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.08s ease, box-shadow 0.08s ease, background 0.15s ease;
+  box-shadow: 3px 3px 0 #141414;
+  background: #fffdf7;
+  color: #141414;
+  line-height: 1;
+}
+.nb-btn:hover { transform: translate(-1px, -1px); box-shadow: 4px 4px 0 #141414; }
+.nb-btn:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0 #141414; }
+.nb-btn:disabled { opacity: 0.45; cursor: not-allowed; transform: none; box-shadow: 3px 3px 0 #141414; }
+.nb-btn-primary { background: #7c63f5; color: #ffffff; }
+.nb-btn-dark { background: #141414; color: #fffdf7; }
+.nb-btn-yellow { background: #ffc900; color: #141414; }
+.nb-btn-danger { background: #ff6b4a; color: #ffffff; }
+.nb-btn-ghost { box-shadow: none; background: transparent; }
+.nb-btn-ghost:hover { background: #141414; color: #fffdf7; transform: none; }
+
+.nb-input,
+.nb-select,
+.nb-textarea {
+  border: 2px solid #141414;
+  background: #ffffff;
+  font-family: "Inter", sans-serif;
+  color: #141414;
+  outline: none;
+  transition: box-shadow 0.12s ease;
+}
+.nb-input:focus,
+.nb-select:focus,
+.nb-textarea:focus {
+  box-shadow: 3px 3px 0 #7c63f5;
+}
+.nb-input::placeholder,
+.nb-textarea::placeholder { color: #8a8474; }
+
+.nb-label {
+  display: block;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #4a463d;
+  margin-bottom: 4px;
+}
+
+.nb-kicker {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.nb-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  border: 2px solid #141414;
+  padding: 2px 8px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  background: #fffdf7;
+  line-height: 1.5;
+}
+
+.nb-badge-live {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 2px solid #141414;
+  background: #a3e635;
+  padding: 2px 8px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.nb-table { width: 100%; border-collapse: collapse; }
+.nb-table th {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-align: left;
+  color: #4a463d;
+  border-bottom: 2px solid #141414;
+  padding: 8px 10px;
+  white-space: nowrap;
+}
+.nb-table td {
+  border-bottom: 1px solid #d9d2c0;
+  padding: 10px;
+  font-size: 13px;
+  vertical-align: middle;
+}
+.nb-table tr:hover td { background: #f6f1e7; }
+
+.nb-progress {
+  height: 14px;
+  border: 2px solid #141414;
+  background: #ffffff;
+  overflow: hidden;
+}
+.nb-progress > div { height: 100%; background: #7c63f5; transition: width 0.3s ease; }
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(20, 20, 20, 0.55);
+  backdrop-filter: blur(2px);
+  z-index: 70;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 4vh 16px 16px;
+  overflow-y: auto;
+}
+
+/* Thin scrollbars — neutral, unobtrusive */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #d6d6e0; border: 3px solid #f7f7fb; border-radius: 999px; }
+::-webkit-scrollbar-thumb:hover { background: #b9b9c9; }
